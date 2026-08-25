@@ -1,0 +1,10 @@
+<botcomponent schemaname="ms_HROnboardingAgent.action.Createanewrecrodinsharepoint">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Create a new recrod in sharepoint</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

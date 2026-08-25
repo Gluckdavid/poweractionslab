@@ -1,0 +1,16 @@
+kind: TaskDialog
+modelDisplayName: SendEmail
+modelDescription: This operation sends an email message.
+outputs:
+  - propertyName: Response
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: ms_HROnboardingAgent.shared_office365.shared-office365-8fd5e74b-d4e2-4a21-a55f-77e18e1aefda
+  connectionProperties:
+    mode: Maker
+
+  operationId: SendEmailV2
+
+outputMode: All
+triggerCondition: true

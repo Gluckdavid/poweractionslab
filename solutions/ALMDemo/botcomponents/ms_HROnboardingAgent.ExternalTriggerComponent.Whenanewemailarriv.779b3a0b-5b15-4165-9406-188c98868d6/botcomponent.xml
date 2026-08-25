@@ -1,0 +1,12 @@
+<botcomponent schemaname="ms_HROnboardingAgent.ExternalTriggerComponent.Whenanewemailarriv.779b3a0b-5b15-4165-9406-188c98868d6">
+  <componenttype>17</componenttype>
+  <description>Trigger your agent with certain message upon event: When a new email arrives (V3).</description>
+  <iconurl>https://static.powerapps.com/resource/ppcr/releases/v1.0.1819/1.0.1819.4795/office365/icon.png</iconurl>
+  <iscustomizable>0</iscustomizable>
+  <name>When a new email arrives (V3)</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,12 @@
+<botcomponent schemaname="ms_HROnboardingAgent.file.KeyRequirementsUseCases-M365BackupAssessment.xlsx_ZUo">
+  <componenttype>14</componenttype>
+  <description>This knowledge source searches information contained in Key Requirements &amp; Use Cases - M365 Backup Assessment.xlsx</description>
+  <filedata mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">Key%20Requirements%20%26%20Use%20Cases%20-%20M365%20Backup%20Assessment.xlsx</filedata>
+  <iscustomizable>0</iscustomizable>
+  <name>Key Requirements &amp; Use Cases - M365 Backup Assessment.xlsx</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

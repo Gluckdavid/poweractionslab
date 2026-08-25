@@ -1,0 +1,2 @@
+kind: RegexEntity
+pattern: kb[0-9]{6}

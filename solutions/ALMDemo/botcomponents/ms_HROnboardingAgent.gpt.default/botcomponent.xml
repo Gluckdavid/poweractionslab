@@ -1,0 +1,11 @@
+<botcomponent schemaname="ms_HROnboardingAgent.gpt.default">
+  <componenttype>15</componenttype>
+  <description>HR Onboarding Agent</description>
+  <iscustomizable>0</iscustomizable>
+  <name>HR Onboarding Agent</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

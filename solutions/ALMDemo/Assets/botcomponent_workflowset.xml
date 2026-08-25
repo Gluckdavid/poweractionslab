@@ -1,0 +1,8 @@
+<botcomponent_workflowset>
+  <botcomponent_workflow botcomponentid.schemaname="ms_HROnboardingAgent.action.Createanewrecrodinsharepoint" workflowid.workflowid="49bee4a9-509c-f111-b8dc-00224806e1f3">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="ms_HROnboardingAgent.ExternalTriggerComponent.Whenanewemailarriv.779b3a0b-5b15-4165-9406-188c98868d6" workflowid.workflowid="2a9a81d1-3a9a-f111-b8db-7ced8d6f2806">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+</botcomponent_workflowset>
