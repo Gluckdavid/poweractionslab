@@ -14,9 +14,9 @@ jobs:
       #You can specify the solution name here
       solution_name: ALMDemo
       #Update your values here
-      BUILD_ENVIRONMENT_URL: 'https://spcdev.crm8.dynamics.com/'
-      PRODUCTION_ENVIRONMENT_URL: 'https://spcqa.crm8.dynamics.com/'
-      CLIENT_ID: '0b8572a0-ac5a-47b5-9eb7-513af0c4997d'
-      TENANT_ID: '7d523251-2503-4739-9e96-6ac5b8e1a745'    
+      BUILD_ENVIRONMENT_URL: 'https://org44f00506.crm.dynamics.com/'
+      PRODUCTION_ENVIRONMENT_URL: 'https://orgb79c1434.crm.dynamics.com/'
+      CLIENT_ID: 'd9a20214-fd30-429f-a909-928d778e28d0'
+      TENANT_ID: 'fcedaa2d-3e67-48a8-932f-f5174bd36c29'    
     secrets:
       envSecret: ${{ secrets.POWERPLATFORMSPN }}
