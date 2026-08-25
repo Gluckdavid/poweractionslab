@@ -1,0 +1,20 @@
+kind: TaskDialog
+inputs:
+  - kind: ManualTaskInput
+    propertyName: dataset
+    value: https://mngenvmcap626344.sharepoint.com/sites/Employeeboarding
+
+modelDisplayName: Create new onboarding request
+modelDescription: Creates a new onboarding request in a SharePoint list.
+outputs:
+  - propertyName: Response
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: ms_HROnboardingAgent.shared_sharepointonline.shared-sharepointonl-64e31510-c849-4e3c-b3bb-191fb88b06ae
+  connectionProperties:
+    mode: Invoker
+
+  operationId: PostItem
+
+outputMode: All

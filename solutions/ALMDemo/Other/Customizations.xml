@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26073.163" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26073.00163">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="ms_HROnboardingAgent.shared_msnweather.edaf7745b5bd4626acf88692a5baf33a">
+      <connectionreferencedisplayname>ms_HROnboardingAgent.shared_msnweather.edaf7745b5bd4626acf88692a5baf33a</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_msnweather</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="ms_HROnboardingAgent.shared_office365.shared-office365-8fd5e74b-d4e2-4a21-a55f-77e18e1aefda">
+      <connectionreferencedisplayname>ms_HROnboardingAgent.shared_office365.shared-office365-8fd5e74b-d4e2-4a21-a55f-77e18e1aefda</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="ms_HROnboardingAgent.shared_sharepointonline.shared-sharepointonl-64e31510-c849-4e3c-b3bb-191fb88b06ae">
+      <connectionreferencedisplayname>ms_HROnboardingAgent.shared_sharepointonline.shared-sharepointonl-64e31510-c849-4e3c-b3bb-191fb88b06ae</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="ms_sharedmicrosoftcopilotstudio_f61c7">
+      <connectionreferencedisplayname>Microsoft Copilot Studio ALMDemo-f61c7</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

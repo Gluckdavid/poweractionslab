@@ -1,0 +1,11 @@
+<botcomponent schemaname="ms_HROnboardingAgent.topic.Onlineorder">
+  <componenttype>9</componenttype>
+  <description>This topic can handle queries like these: online order, place an order online, how do I order online, order through website, buy online, for devices, eg Laptop, headphones and etc.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Online order</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

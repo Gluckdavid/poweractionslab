@@ -1,0 +1,45 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Greeting
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Good afternoon
+      - Good morning
+      - Hello
+      - Hey
+      - Hi
+
+  actions:
+    - kind: Question
+      id: question_83yMVh
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.varCountry
+      prompt: where are you from?
+      entity: CityPrebuiltEntity
+
+    - kind: SendActivity
+      id: sendActivity_qPFaZS
+      activity: "City: {Topic.varCountry}"
+
+    - kind: Question
+      id: question_G9q8O3
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Var1
+      prompt: whats your KB article number
+      entity:
+        kind: RegexEntityReference
+        entityId: ms_HROnboardingAgent.entity.KBArticle
+
+    - kind: SendActivity
+      id: sendActivity_QGWWqe
+      activity: "{Topic.Var1}"
+
+    - kind: CancelAllDialogs
+      id: cancelAllDialogs_01At22

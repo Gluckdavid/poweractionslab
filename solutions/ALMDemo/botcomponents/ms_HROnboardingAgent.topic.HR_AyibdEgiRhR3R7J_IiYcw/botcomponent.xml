@@ -1,0 +1,11 @@
+<botcomponent schemaname="ms_HROnboardingAgent.topic.HR_AyibdEgiRhR3R7J_IiYcw">
+  <componenttype>16</componenttype>
+  <description>This knowledge source provides information found in HR SharePoint.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>HR</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

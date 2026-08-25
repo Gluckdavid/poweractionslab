@@ -1,0 +1,18 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: text_1
+    description: Please enter your Email body
+
+outputs:
+  - propertyName: outcome
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 49bee4a9-509c-f111-b8dc-00224806e1f3
+  connectionProperties:
+    $kind: ConnectionProperties
+    diagnostics:
+    mode: Invoker
+
+outputMode: All

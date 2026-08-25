@@ -1,0 +1,11 @@
+<botcomponent_connectionreferenceset>
+  <botcomponent_connectionreference botcomponentid.schemaname="ms_HROnboardingAgent.action.MSNWeather-Getcurrentweather" connectionreferenceid.connectionreferencelogicalname="ms_HROnboardingAgent.shared_msnweather.edaf7745b5bd4626acf88692a5baf33a">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="ms_HROnboardingAgent.action.Office365Outlook-SendanemailV2" connectionreferenceid.connectionreferencelogicalname="ms_HROnboardingAgent.shared_office365.shared-office365-8fd5e74b-d4e2-4a21-a55f-77e18e1aefda">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="ms_HROnboardingAgent.action.SharePoint-Createitem" connectionreferenceid.connectionreferencelogicalname="ms_HROnboardingAgent.shared_sharepointonline.shared-sharepointonl-64e31510-c849-4e3c-b3bb-191fb88b06ae">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+</botcomponent_connectionreferenceset>

@@ -1,0 +1,83 @@
+kind: AdaptiveDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: DeviceType
+    description: Device Type
+    shouldPromptUser: true
+
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    triggerQueries:
+      - online order
+      - place an order online
+      - how do I order online
+      - order through website
+      - buy online
+      - can I purchase online?
+      - start an online order
+      - ordering on the web
+      - order from your site
+      - shop online
+
+  actions:
+    - kind: Question
+      id: Question_23JdNm
+      variable: Topic.DeviceType
+      prompt:
+        text:
+          - What type of device would you like to order?
+          - Please select the device you want to order.
+
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          optionSetName: DeviceTypeOptions
+          items:
+            - id: laptop
+              displayName: Laptop
+
+            - id: keyboard
+              displayName: Keyboard
+
+            - id: headphones
+              displayName: Headphones
+
+            - id: mouse
+              displayName: Mouse
+
+            - id: monitor
+              displayName: Monitor
+
+    - kind: Question
+      id: Question_65uYnK
+      variable: Topic.Name
+      prompt: Please provide your name.
+      entity: PersonNamePrebuiltEntity
+
+    - kind: Question
+      id: Question_AEhA7b
+      variable: Topic.EmailAddress
+      prompt: Please provide your email address.
+      entity: EmailPrebuiltEntity
+
+    - kind: Question
+      id: Question_L4tjCR
+      variable: Topic.DeliveryAddress
+      prompt: Please provide your delivery address.
+      entity: StreetAddressPrebuiltEntity
+
+    - kind: SendActivity
+      id: SendActivity_PnP50S
+      activity: "Thank you, {Topic.Name}! Your order for a {Topic.DeviceType} will be processed and confirmation sent to {Topic.EmailAddress}. Delivery will be made to: {Topic.DeliveryAddress}."
+
+inputType:
+  properties:
+    DeviceType:
+      displayName: DeviceType
+      description: Device Type
+      type: String
+
+outputType: {}

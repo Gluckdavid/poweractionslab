@@ -1,0 +1,11 @@
+<botcomponent schemaname="ms_HROnboardingAgent.entity.KBArticle">
+  <componenttype>11</componenttype>
+  <description>KBArticle</description>
+  <iscustomizable>0</iscustomizable>
+  <name>KBArticle</name>
+  <parentbotid>
+    <schemaname>ms_HROnboardingAgent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
