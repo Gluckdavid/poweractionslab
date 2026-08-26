@@ -1,136 +1,147 @@
 name: release-solution-to-prod
-# Reusable workflow
-# convert solution to managed (using a build PowerPlatform environment for the conversion)
-# upload the solution to the GitHub artifacts and deploy to the PROD environment
+
+# Converts an unmanaged solution to managed in a build environment,
+# stores it as an artifact, then imports it into Production.
+
 on:
+  # Allows this workflow to be called by release-action-call.yml
   workflow_call:
-    inputs: 
-      #Do Not change these values
-      #Values are set by the caller
-      #caller sample: release-action-call.ymnl
+    inputs:
       solution_name:
-        description: 'The solution name.'
+        description: "Solution unique name and unpacked source-folder name"
+        required: true
         type: string
-        default: GithubALMDemo       
-      solution_shipping_folder:
-        description: 'folder name for staging the exported solution *do not change*'        
-        type: string
-        default: out/ship/
-      solution_outbound_folder:
-        description: 'staging the unpacked solution folder before check-in *do not change*'
-        type: string
-        default: out/solutions/
-      solution_source_folder: 
-       description: 'folder name to be created and checked in *do not change*'
-       type: string
-       default: solutions/
-      solution_release_folder:
-       description: 'folder where the released binaries are going to be hosted *do not change*'
-       type: string
-       default: out/release
       BUILD_ENVIRONMENT_URL:
-        description: 'Build environment url'
-        type: string
-        required: true      
-      PRODUCTION_ENVIRONMENT_URL: 
-        description: 'Production environment url'
-        type: string
+        description: "Build environment URL"
         required: true
-      CLIENT_ID: 
-        description: 'The client id'
         type: string
+      PRODUCTION_ENVIRONMENT_URL:
+        description: "Production environment URL"
         required: true
-      TENANT_ID: 
-        description: 'The tenant id'
         type: string
+      CLIENT_ID:
+        description: "Microsoft Entra application (client) ID"
         required: true
+        type: string
+      TENANT_ID:
+        description: "Microsoft Entra tenant ID"
+        required: true
+        type: string
     secrets:
       envSecret:
-        description: 'The secret value for authentication using SPN'
+        description: "SPN client secret"
         required: true
+
+  # Allows manual execution from the GitHub Actions page
+  workflow_dispatch:
+    inputs:
+      solution_name:
+        description: "Solution unique name and unpacked source-folder name"
+        required: true
+        type: string
+        default: GithubALMDemo
+      BUILD_ENVIRONMENT_URL:
+        description: "Build environment URL"
+        required: true
+        type: string
+        default: https://org44f00506.crm.dynamics.com/
+      PRODUCTION_ENVIRONMENT_URL:
+        description: "Production environment URL"
+        required: true
+        type: string
+        default: https://orgb79c1434.crm.dynamics.com/
+      CLIENT_ID:
+        description: "Microsoft Entra application (client) ID"
+        required: true
+        type: string
+        default: d9a20214-fd30-429f-a909-928d778e28d0
+      TENANT_ID:
+        description: "Microsoft Entra tenant ID"
+        required: true
+        type: string
+        default: fcedaa2d-3e67-48a8-932f-f5174bd36c29
+
+permissions:
+  contents: read
 
 jobs:
   convert-to-managed:
+    name: Convert solution to managed
     runs-on: windows-latest
-    # or you can say runs-on: ubuntu-latest
-    env:
-      RUNNER_DEBUG: 1
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        lfs: true
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          lfs: true
 
-    - name: Install Power Platform Tools
-      uses: microsoft/powerplatform-actions/actions-install@v1.9.2
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1.9.2
 
-    - name: Pack solution
-      uses: microsoft/powerplatform-actions/pack-solution@v1.9.2
-      with:
-        solution-folder: ${{ inputs.solution_source_folder}}/${{ inputs.solution_name }}
-        solution-file: ${{ inputs.solution_outbound_folder}}/${{ inputs.solution_name }}.zip
-        solution-type: Unmanaged
+      - name: Pack unmanaged solution
+        uses: microsoft/powerplatform-actions/pack-solution@v1.9.2
+        with:
+          solution-folder: solutions/${{ inputs.solution_name }}
+          solution-file: out/solutions/${{ inputs.solution_name }}.zip
+          solution-type: Unmanaged
 
-    - name: Import solution as unmanaged to build env
-      uses: microsoft/powerplatform-actions/import-solution@v1.9.2
-      with:
-        environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }}
-        tenant-id: ${{inputs.TENANT_ID}}
-        solution-file: ${{ inputs.solution_outbound_folder}}/${{ inputs.solution_name }}.zip
-        force-overwrite: true
-        publish-changes: true
-        run-asynchronously: true
-        max-async-wait-time: 60
+      - name: Import unmanaged solution to build environment
+        uses: microsoft/powerplatform-actions/import-solution@v1.9.2
+        with:
+          environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
+          app-id: ${{ inputs.CLIENT_ID }}
+          client-secret: ${{ secrets.envSecret }}
+          tenant-id: ${{ inputs.TENANT_ID }}
+          solution-file: out/solutions/${{ inputs.solution_name }}.zip
+          force-overwrite: true
+          publish-changes: true
+          run-asynchronously: true
+          max-async-wait-time: 60
 
-    - name: Export solution as managed
-      uses: microsoft/powerplatform-actions/export-solution@v1.9.2
-      with:
-        environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }} 
-        tenant-id: ${{inputs.TENANT_ID}}
-        solution-name: ${{ inputs.solution_name }}
-        managed: true
-        solution-output-file: ${{ inputs.solution_shipping_folder}}/${{ inputs.solution_name }}_managed.zip
-        run-asynchronously: true
-        max-async-wait-time: 60
+      - name: Export managed solution from build environment
+        uses: microsoft/powerplatform-actions/export-solution@v1.9.2
+        with:
+          environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
+          app-id: ${{ inputs.CLIENT_ID }}
+          client-secret: ${{ secrets.envSecret }}
+          tenant-id: ${{ inputs.TENANT_ID }}
+          solution-name: ${{ inputs.solution_name }}
+          managed: true
+          solution-output-file: out/ship/${{ inputs.solution_name }}_managed.zip
+          run-asynchronously: true
+          max-async-wait-time: 60
 
-    - name: Upload the ready to ship solution to GH artifact store
-      uses: actions/upload-artifact@v4
-      with:
-        name: managedSolutions
-        path: ${{ inputs.solution_shipping_folder}}/
+      - name: Upload managed solution artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: managedSolutions
+          path: out/ship/${{ inputs.solution_name }}_managed.zip
+          if-no-files-found: error
 
-  release-to-staging:
-    needs: [ convert-to-managed ]
+  release-to-production:
+    name: Import managed solution to Production
+    needs: convert-to-managed
     runs-on: windows-latest
-    env:
-      RUNNER_DEBUG: 1
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        lfs: true
+      - name: Download managed solution artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: managedSolutions
+          path: out/release
 
-    - name: Install Power Platform Tools
-      uses: microsoft/powerplatform-actions/actions-install@v1.9.2
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1.9.2
 
-    - name: Fetch the ready to ship solution from GH artifact store
-      uses: actions/download-artifact@v4
-      with:
-        name: managedSolutions
-        path: ${{ inputs.solution_release_folder}}
-    - name: Import solution to prod env
-      uses: microsoft/powerplatform-actions/import-solution@v1.9.2
-      with:
-        environment-url: ${{inputs.PRODUCTION_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.envSecret }}
-        tenant-id: ${{inputs.TENANT_ID}}
-        solution-file: ${{ inputs.solution_release_folder}}/${{ inputs.solution_name }}_managed.zip
-        force-overwrite: true
-        publish-changes: true
-        run-asynchronously: true
-        max-async-wait-time: 60
+      - name: Import managed solution to Production
+        uses: microsoft/powerplatform-actions/import-solution@v1.9.2
+        with:
+          environment-url: ${{ inputs.PRODUCTION_ENVIRONMENT_URL }}
+          app-id: ${{ inputs.CLIENT_ID }}
+          client-secret: ${{ secrets.envSecret }}
+          tenant-id: ${{ inputs.TENANT_ID }}
+          solution-file: out/release/${{ inputs.solution_name }}_managed.zip
+          force-overwrite: true
+          publish-changes: true
+          run-asynchronously: true
+          max-async-wait-time: 60
