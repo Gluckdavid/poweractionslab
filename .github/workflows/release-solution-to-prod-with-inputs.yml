@@ -1,10 +1,10 @@
 name: release-solution-to-prod
 
 # Converts an unmanaged solution to managed in a build environment,
-# stores it as an artifact, then imports it into Production.
+# saves it as a GitHub artifact, then imports it into Production.
 
 on:
-  # Allows this workflow to be called by release-action-call.yml
+  # Called by release-action-call.yml
   workflow_call:
     inputs:
       solution_name:
@@ -29,10 +29,10 @@ on:
         type: string
     secrets:
       envSecret:
-        description: "SPN client secret"
+        description: "SPN client secret supplied by the calling workflow"
         required: true
 
-  # Allows manual execution from the GitHub Actions page
+  # Enables Actions > Run workflow for testing or manual deployment
   workflow_dispatch:
     inputs:
       solution_name:
@@ -90,7 +90,7 @@ jobs:
         with:
           environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
           app-id: ${{ inputs.CLIENT_ID }}
-          client-secret: ${{ secrets.envSecret }}
+          client-secret: ${{ secrets.envSecret || secrets.POWERPLATFORMSPN }}
           tenant-id: ${{ inputs.TENANT_ID }}
           solution-file: out/solutions/${{ inputs.solution_name }}.zip
           force-overwrite: true
@@ -103,7 +103,7 @@ jobs:
         with:
           environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
           app-id: ${{ inputs.CLIENT_ID }}
-          client-secret: ${{ secrets.envSecret }}
+          client-secret: ${{ secrets.envSecret || secrets.POWERPLATFORMSPN }}
           tenant-id: ${{ inputs.TENANT_ID }}
           solution-name: ${{ inputs.solution_name }}
           managed: true
@@ -138,7 +138,7 @@ jobs:
         with:
           environment-url: ${{ inputs.PRODUCTION_ENVIRONMENT_URL }}
           app-id: ${{ inputs.CLIENT_ID }}
-          client-secret: ${{ secrets.envSecret }}
+          client-secret: ${{ secrets.envSecret || secrets.POWERPLATFORMSPN }}
           tenant-id: ${{ inputs.TENANT_ID }}
           solution-file: out/release/${{ inputs.solution_name }}_managed.zip
           force-overwrite: true
