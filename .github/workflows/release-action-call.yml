@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
     with:
       #You can specify the solution name here
-      solution_name: ALMDemo
+      solution_name: GithubALMDemo
       #Update your values here
       BUILD_ENVIRONMENT_URL: 'https://org44f00506.crm.dynamics.com/'
       PRODUCTION_ENVIRONMENT_URL: 'https://orgb79c1434.crm.dynamics.com/'
